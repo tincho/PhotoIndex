@@ -58,6 +58,10 @@ function h($text)  {
                 continue;
             }
 
+            $maxlen_footer = 140;
+            $footer = substr(h($photo['body']), 0, $maxlen_footer);
+            if ($maxlen_footer < h($photo['body'])) $footer .= '...';
+
             foreach ($thumbs as $thumb) {
 ?>
                 <!-- photo -->
@@ -65,7 +69,7 @@ function h($text)  {
                     data-toggle="lightbox"
                     data-remote="<?= $thumb; ?>"
                     data-title="<?= h($photo['title']); ?>"
-                    data-footer="<?= h($photo['body']); ?>"
+                    data-footer="<?= $footer ?> <a target='blank' class='badge badge-light' href='<?php echo $photo->getURL(); ?>'><i class='fa fa-external-link-alt'></i></a>"
                     data-gallery="photoindex">
                     <div class="photo" style="background-image:url(<?= $thumb ?>); background-size: cover; background-position: 50%">
                     </div>
